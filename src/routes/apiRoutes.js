@@ -1,7 +1,5 @@
 const express = require('express');
-const { body } = require('express-validator');
 const projectController = require('../controllers/projectController');
-const contactController = require('../controllers/contactController');
 const dataService = require('../services/dataService');
 const { upload } = require('../middleware/middleware');
 
@@ -18,16 +16,6 @@ router.get('/api/services', (req, res) => {
   res.status(200).json(services);
 });
 router.get('/api/portfolio', projectController.getPortfolio);
-
-router.post(
-  '/api/contact',
-  [
-    body('name').trim().notEmpty().withMessage('Name is required'),
-    body('email').isEmail().withMessage('Valid email required'),
-    body('message').trim().notEmpty().withMessage('Message is required'),
-  ],
-  contactController.handleContact
-);
 
 router.post('/api/admin/upload', upload.single('file'), (req, res) => {
   const token = req.header('x-admin-token') || req.query.token;
