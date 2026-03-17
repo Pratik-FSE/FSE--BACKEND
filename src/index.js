@@ -1,2 +1,2 @@
 // Entrypoint: start the server
-require('./server');
+require('./server.js');
