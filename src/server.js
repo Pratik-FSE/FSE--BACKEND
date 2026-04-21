@@ -22,8 +22,10 @@ app.use(
       const allowlist = [
         "https://fullscreenexperiences.com",
         "http://localhost:8080",
+        "http://localhost:8081",
         "http://localhost:5173",
         "http://127.0.0.1:8080",
+        "http://127.0.0.1:8081",
         "http://127.0.0.1:5173",
       ];
 
@@ -31,9 +33,11 @@ app.use(
         allowlist.push(process.env.CORS_ORIGIN);
       }
 
-      return allowlist.includes(origin) ? cb(null, true) : cb(new Error("Not allowed by CORS"));
+      return allowlist.includes(origin)
+        ? cb(null, true)
+        : cb(new Error("Not allowed by CORS"));
     },
-  })
+  }),
 );
 
 // --- API routes under /api ---
